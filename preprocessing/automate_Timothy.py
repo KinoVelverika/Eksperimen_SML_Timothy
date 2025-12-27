@@ -14,12 +14,12 @@ def load_data(path):
 def preprocess_data(df):
     print("⚙️ Sedang memproses data...")
     
-    # 1. Hapus Duplikat
+    #Hapus Duplikat
     initial_len = len(df)
     df.drop_duplicates(inplace=True)
     print(f"   -> Dihapus {initial_len - len(df)} data duplikat.")
 
-    # 2. Handling Missing Values
+    #Handling Missing Values
     numeric_cols = df.select_dtypes(include=[np.number]).columns
     categorical_cols = df.select_dtypes(exclude=[np.number]).columns
 
@@ -31,7 +31,7 @@ def preprocess_data(df):
     for col in categorical_cols:
         df[col] = df[col].fillna(df[col].mode()[0])
 
-    # 3. Encoding (Ubah Huruf ke Angka)
+    #Encoding (Ubah Huruf ke Angka)
     le = LabelEncoder()
     for col in categorical_cols:
         df[col] = le.fit_transform(df[col].astype(str))
